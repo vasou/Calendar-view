@@ -27,6 +27,9 @@
 }
 
 /* Calendar styles */
+.calendar-group {
+  @apply relative;
+}
 .calendar-header {
   @apply sticky top-0 left-0 right-0 min-h-20 flex flex-row bg-white z-50 border-b border-solid border-gray-300;
 }
@@ -47,4 +50,17 @@
 }
 .calendar-list .one-hr-block {
   @apply w-full h-10 border-0 border-t border-b border-solid border-gray-200;
+}
+/* Event styles */
+.event-list-wrap {
+  @apply relative;
+}
+.event-list-blk {
+  @apply absolute left-0 top-0 right-0 bottom-0 w-full flex;
+}
+.event-list-blk .timeslots {
+  @apply grid shrink-0 w-24;
+}
+.event-card {
+  @apply relative w-[95%] min-h-2 p-1 text-sm bg-blue-700 text-white rounded-md;
 }

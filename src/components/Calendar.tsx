@@ -12,6 +12,12 @@ import {
   format,
   addDays,
 } from "date-fns";
+import { sampleData } from "../userdata/sampleData";
+
+type eventType = {
+  id: number;
+  summary: string;
+};
 
 export default function Calendar() {
   const [view, setView] = useState("Week");
@@ -19,37 +25,47 @@ export default function Calendar() {
   const [dates, setDates] = useState([new Date()]);
   const [clickCount, setClickCount] = useState(0);
   const [isTodayActive, SetIsTodayActive] = useState(true);
+  const [eventsList, setEventsList] = useState<eventType[]>([]);
 
   const today = startOfToday();
   const weekStarts = startOfWeek(today, { weekStartsOn: 0 });
   const weekEnds = endOfWeek(today, { weekStartsOn: 0 });
 
   useEffect(() => {
-    const FindViewValue = (view: string) => {
-      switch (view) {
-        case "Today": {
-          return setViewValue(CalendarView[0].columns);
-        }
-        case "Week": {
-          return setViewValue(CalendarView[1].columns);
-        }
-        case "Month": {
-          return setViewValue(CalendarView[2].columns);
-        }
-        case "Year": {
-          return setViewValue(CalendarView[3].columns);
-        }
-        default:
-          setViewValue(0);
-      }
-    };
-
     FindViewValue(view);
-  }, []);
+  }, [viewValue]);
 
   useEffect(() => {
     showThisWeek();
+    handleGetEvents();
   }, []);
+
+  const handleGetEvents = async () => {
+    // const data = fetch("https://jsonplaceholder.typicode.com/users")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setEventsList(data);
+    //   });
+  };
+
+  const FindViewValue = (view: string) => {
+    switch (view) {
+      case "Today": {
+        return setViewValue(CalendarView[0].columns);
+      }
+      case "Week": {
+        return setViewValue(CalendarView[1].columns);
+      }
+      case "Month": {
+        return setViewValue(CalendarView[2].columns);
+      }
+      case "Year": {
+        return setViewValue(CalendarView[3].columns);
+      }
+      default:
+        setViewValue(0);
+    }
+  };
 
   const showThisWeek = () => {
     const daysOfWeek = eachDayOfInterval({ start: weekStarts, end: weekEnds });
@@ -78,10 +94,23 @@ export default function Calendar() {
     setDates(daysOfWeek);
     SetIsTodayActive(false);
   };
-
   return (
     <div className="calendar-wrap">
       {/* Top bar block */}
+      <div>
+        {sampleData &&
+          sampleData.map((event: any, index) => {
+            return (
+              <div key={index}>
+                <p>{event.summary}</p>
+                <div>
+                  <span>{event.start && format(event.start, "hh aaa")}</span> -{" "}
+                  <span>{event.end && format(event.end, "hh aaa")}</span>
+                </div>
+              </div>
+            );
+          })}
+      </div>
       <div className="top-bar">
         <h2>Your Todo's</h2>
         <div className="flex gap-4">
@@ -149,6 +178,23 @@ export default function Calendar() {
                 );
               })}
           </>
+        </div>
+        {/* Calendar data block */}
+        <div className="event-list-wrap">
+          <div className="event-list-blk">
+            <div className="timeslots"></div>
+            <>
+              {[...Array(viewValue)].map((_, index) => {
+                return (
+                  <div className="day-wrapper" key={index}>
+                    <div className="event-card">
+                      <p>Title</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          </div>
         </div>
         {/* Calendar list */}
         <div className="calendar-list">
