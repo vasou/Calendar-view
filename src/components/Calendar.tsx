@@ -17,6 +17,8 @@ import { sampleData } from "../userdata/sampleData";
 type eventType = {
   id: number;
   summary: string;
+  start: string;
+  end: string;
 };
 
 export default function Calendar() {
@@ -172,7 +174,7 @@ export default function Calendar() {
                         <p>{format(item, "d MMM")}</p>
                       )}
 
-                      <p>{format(item, "EEE")}</p>
+                      <p className="text-gray-500">{format(item, "EEEE")}</p>
                     </div>
                   </div>
                 );
@@ -184,12 +186,33 @@ export default function Calendar() {
           <div className="event-list-blk">
             <div className="timeslots"></div>
             <>
-              {[...Array(viewValue)].map((_, index) => {
+              {dates.map((dateList, index) => {
                 return (
                   <div className="day-wrapper" key={index}>
-                    <div className="event-card">
-                      <p>Title</p>
-                    </div>
+                    {sampleData.map((eventInfo, index) => {
+                      const position =
+                        parseInt(format(eventInfo.start, "H")) * 56;
+                      return (
+                        <>
+                          {format(dateList, "dd/MM/yyyy") ===
+                            format(eventInfo.start, "dd/MM/yyyy") && (
+                            <div
+                              className="event-card"
+                              style={{
+                                top: `${position}px`,
+                              }}
+                              key={index}
+                            >
+                              <p>{eventInfo.summary}</p>
+                              <p>
+                                {format(eventInfo.start, "hh aaa")} -{" "}
+                                {format(eventInfo.end, "hh aaa")}
+                              </p>
+                            </div>
+                          )}
+                        </>
+                      );
+                    })}
                   </div>
                 );
               })}

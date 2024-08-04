@@ -18,7 +18,7 @@ export const Years = ["2020", "2021", "2022", "2023", "2024"];
 export const CalendarView = [
   {
     id: 1,
-    name: "Today",
+    name: "Day",
     columns: 1,
   },
   {

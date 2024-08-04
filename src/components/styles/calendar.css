@@ -49,18 +49,18 @@
   @apply block w-20 text-right text-[12px] -mt-2 font-semibold text-blue-700;
 }
 .calendar-list .one-hr-block {
-  @apply w-full h-10 border-0 border-t border-b border-solid border-gray-200;
+  @apply w-full h-14 border-0 border-t border-b border-solid border-gray-200;
 }
 /* Event styles */
 .event-list-wrap {
   @apply relative;
 }
 .event-list-blk {
-  @apply absolute left-0 top-0 right-0 bottom-0 w-full flex;
+  @apply absolute left-0 top-0 right-0 bottom-0 w-full flex z-40;
 }
 .event-list-blk .timeslots {
   @apply grid shrink-0 w-24;
 }
 .event-card {
-  @apply relative w-[95%] min-h-2 p-1 text-sm bg-blue-700 text-white rounded-md;
+  @apply absolute w-[95%] min-h-14 p-1 text-sm leading-[16px] bg-blue-700 text-white rounded-md;
 }
