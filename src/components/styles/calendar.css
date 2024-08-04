@@ -1,0 +1,41 @@
+.calendar-wrap {
+  @apply p-4 bg-white rounded-md;
+}
+.top-bar {
+  @apply mb-6 flex justify-between items-center gap-6;
+}
+.top-bar select {
+  @apply px-1 py-2 border border-solid border-gray-400 rounded-md;
+}
+.icon-btn {
+  @apply p-2 hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-200 border border-solid border-gray-300 rounded-md;
+}
+.nav-bar {
+  @apply mb-6 flex justify-between items-center gap-6;
+}
+.nav-bar .nav-link {
+  @apply text-lg;
+}
+
+/* Calendar styles */
+.calendar-header {
+  @apply sticky top-0 left-0 right-0 min-h-20 flex flex-row bg-white z-50;
+}
+.calendar-header .timeslots {
+  @apply grid shrink-0 w-24;
+}
+.day-wrapper {
+  @apply w-full relative border-0 border-l border-solid border-gray-200;
+}
+.calendar-list {
+  @apply flex flex-row;
+}
+.calendar-list .timeslots {
+  @apply grid shrink-0 w-24;
+}
+.calendar-list .one-hr-block span {
+  @apply block text-[12px] -mt-2;
+}
+.calendar-list .one-hr-block {
+  @apply w-full h-10 border-0 border-t border-b border-solid border-gray-200;
+}
