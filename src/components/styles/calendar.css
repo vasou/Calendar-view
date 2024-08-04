@@ -8,7 +8,10 @@
   @apply px-1 py-2 border border-solid border-gray-400 rounded-md;
 }
 .icon-btn {
-  @apply p-2 hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-200 border border-solid border-gray-300 rounded-md;
+  @apply p-2 hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200 border border-solid border-blue-700 rounded-md;
+}
+.icon-btn svg {
+  @apply stroke-blue-700;
 }
 .nav-bar {
   @apply mb-6 flex justify-between items-center gap-6;
@@ -34,7 +37,7 @@
   @apply grid shrink-0 w-24;
 }
 .calendar-list .one-hr-block span {
-  @apply block text-[12px] -mt-2;
+  @apply block text-[12px] -mt-2 font-semibold text-blue-700;
 }
 .calendar-list .one-hr-block {
   @apply w-full h-10 border-0 border-t border-b border-solid border-gray-200;

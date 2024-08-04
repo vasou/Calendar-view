@@ -80,7 +80,10 @@ export default function Calendar() {
             {[...Array(viewValue)].map((_, index) => {
               return (
                 <div className="day-wrapper" key={index}>
-                  Date
+                  <div className="flex flex-col justify-center items-center gap-2 h-full">
+                    <p>05 Mar</p>
+                    <p>Monday</p>
+                  </div>
                 </div>
               );
             })}
