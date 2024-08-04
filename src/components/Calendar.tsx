@@ -10,14 +10,19 @@ import {
   startOfWeek,
   eachDayOfInterval,
   format,
+  addDays,
 } from "date-fns";
 
 export default function Calendar() {
   const [view, setView] = useState("Week");
   const [viewValue, setViewValue] = useState(0);
   const [dates, setDates] = useState([new Date()]);
+  const [clickCount, setClickCount] = useState(0);
+  const [isTodayActive, SetIsTodayActive] = useState(true);
 
   const today = startOfToday();
+  const weekStarts = startOfWeek(today, { weekStartsOn: 0 });
+  const weekEnds = endOfWeek(today, { weekStartsOn: 0 });
 
   useEffect(() => {
     const FindViewValue = (view: string) => {
@@ -43,11 +48,36 @@ export default function Calendar() {
   }, []);
 
   useEffect(() => {
-    const weekStarts = startOfWeek(today);
-    const weekEnds = endOfWeek(today);
+    showThisWeek();
+  }, []);
+
+  const showThisWeek = () => {
     const daysOfWeek = eachDayOfInterval({ start: weekStarts, end: weekEnds });
     setDates(daysOfWeek);
-  }, []);
+    SetIsTodayActive(true);
+  };
+
+  const showPrevWeek = () => {
+    const counter = clickCount - 7;
+    const daysOfWeek = eachDayOfInterval({
+      start: addDays(startOfWeek(today, { weekStartsOn: 0 }), counter),
+      end: addDays(endOfWeek(today, { weekStartsOn: 0 }), counter),
+    });
+    setClickCount(counter);
+    setDates(daysOfWeek);
+    SetIsTodayActive(false);
+  };
+
+  const showNextWeek = () => {
+    const counter = clickCount + 7;
+    const daysOfWeek = eachDayOfInterval({
+      start: addDays(startOfWeek(today, { weekStartsOn: 0 }), counter),
+      end: addDays(endOfWeek(today, { weekStartsOn: 0 }), counter),
+    });
+    setClickCount(counter);
+    setDates(daysOfWeek);
+    SetIsTodayActive(false);
+  };
 
   return (
     <div className="calendar-wrap">
@@ -70,17 +100,26 @@ export default function Calendar() {
       {/* Nav bar block */}
       <div className="nav-bar">
         <div className="flex gap-2">
-          <button className="icon-btn">
+          <button className="icon-btn" onClick={showPrevWeek}>
             <LeftArrow />
           </button>
-          <button className="icon-btn">
+          <button
+            className={`!px-6 icon-btn ${isTodayActive ? "active" : ""}`}
+            onClick={showThisWeek}
+          >
+            Today
+          </button>
+          <button className="icon-btn" onClick={showNextWeek}>
             <RightArrow />
           </button>
         </div>
         <div className="flex gap-8">
           {CalendarView.map((list, index) => {
             return (
-              <button className="nav-link" key={index}>
+              <button
+                className={`nav-link ${list.name === view ? "active" : ""}`}
+                key={index}
+              >
                 {list.name}
               </button>
             );

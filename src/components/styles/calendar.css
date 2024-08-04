@@ -10,6 +10,9 @@
 .icon-btn {
   @apply p-2 hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200 border border-solid border-blue-700 rounded-md;
 }
+.icon-btn.active {
+  @apply bg-blue-700 text-white;
+}
 .icon-btn svg {
   @apply stroke-blue-700;
 }
@@ -19,10 +22,13 @@
 .nav-bar .nav-link {
   @apply text-lg;
 }
+.nav-bar .nav-link.active {
+  @apply font-semibold text-blue-700;
+}
 
 /* Calendar styles */
 .calendar-header {
-  @apply sticky top-0 left-0 right-0 min-h-20 flex flex-row bg-white z-50;
+  @apply sticky top-0 left-0 right-0 min-h-20 flex flex-row bg-white z-50 border-b border-solid border-gray-300;
 }
 .calendar-header .timeslots {
   @apply grid shrink-0 w-24;
@@ -37,7 +43,7 @@
   @apply grid shrink-0 w-24;
 }
 .calendar-list .one-hr-block span {
-  @apply block text-[12px] -mt-2 font-semibold text-blue-700;
+  @apply block w-20 text-right text-[12px] -mt-2 font-semibold text-blue-700;
 }
 .calendar-list .one-hr-block {
   @apply w-full h-10 border-0 border-t border-b border-solid border-gray-200;
