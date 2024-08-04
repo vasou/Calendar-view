@@ -4,11 +4,20 @@ import { Months, Years, CalendarView, Timeslots } from "../userdata/calendar";
 import LeftArrow from "../assets/LeftArrow";
 import RightArrow from "../assets/RightArrow";
 import { useEffect, useState } from "react";
+import {
+  endOfWeek,
+  startOfToday,
+  startOfWeek,
+  eachDayOfInterval,
+  format,
+} from "date-fns";
 
 export default function Calendar() {
   const [view, setView] = useState("Week");
   const [viewValue, setViewValue] = useState(0);
-  console.log(viewValue);
+  const [dates, setDates] = useState([new Date()]);
+
+  const today = startOfToday();
 
   useEffect(() => {
     const FindViewValue = (view: string) => {
@@ -31,6 +40,13 @@ export default function Calendar() {
     };
 
     FindViewValue(view);
+  }, []);
+
+  useEffect(() => {
+    const weekStarts = startOfWeek(today);
+    const weekEnds = endOfWeek(today);
+    const daysOfWeek = eachDayOfInterval({ start: weekStarts, end: weekEnds });
+    setDates(daysOfWeek);
   }, []);
 
   return (
@@ -77,16 +93,22 @@ export default function Calendar() {
         <div className="calendar-header">
           <div className="timeslots"></div>
           <>
-            {[...Array(viewValue)].map((_, index) => {
-              return (
-                <div className="day-wrapper" key={index}>
-                  <div className="flex flex-col justify-center items-center gap-2 h-full">
-                    <p>05 Mar</p>
-                    <p>Monday</p>
+            {dates &&
+              dates.map((item, index) => {
+                return (
+                  <div className="day-wrapper" key={index}>
+                    <div className="flex flex-col justify-center items-center gap-2 h-full">
+                      {format(item, "d MMM") === format(today, "d MMM") ? (
+                        <p className="text-blue-700">{format(item, "d MMM")}</p>
+                      ) : (
+                        <p>{format(item, "d MMM")}</p>
+                      )}
+
+                      <p>{format(item, "EEE")}</p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </>
         </div>
         {/* Calendar list */}
