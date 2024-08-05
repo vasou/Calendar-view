@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import EventCard from "./EventCard";
 
@@ -26,7 +26,21 @@ export default function DateColumn({
   eventsList,
   columnKey,
 }: DateColumnProps) {
-  console.log(eventsList);
+  const [columnEvent, setColumnEvent] = useState<eventType[]>([]);
+
+  useEffect(() => {
+    findColumnEvent();
+  }, [eventsList]);
+
+  const findColumnEvent = () => {
+    const data = eventsList.filter(
+      (item) => format(item.start, "HH") === format(datesCount, "HH")
+    );
+    console.log(data);
+    setColumnEvent(data);
+  };
+  console.log(columnEvent);
+
   return (
     <div className="day-wrapper" key={columnKey}>
       {eventsList.map((event, index) => {
@@ -44,6 +58,15 @@ export default function DateColumn({
           </>
         );
       })}
+      {columnEvent &&
+        columnEvent.map((event, index) => {
+          return (
+            <>
+              <p>{event.start}</p>
+              <p>{event.end}</p>
+            </>
+          );
+        })}
     </div>
   );
 }

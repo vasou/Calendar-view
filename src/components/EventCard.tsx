@@ -10,7 +10,6 @@ type eventType = {
   attendees: string;
   status: null;
   comment: null;
-  //   score: { zsdf: number; asdf?: undefined; SF?: undefined; asf?: undefined };
   link: string;
 };
 
@@ -20,7 +19,7 @@ interface EventCardProps {
   eventList: any;
 }
 const EventCard = ({ position, indexNumber, eventList }: EventCardProps) => {
-  console.log(eventList);
+  // console.log(eventList);
   return (
     <>
       <div

@@ -23,14 +23,14 @@ type eventType = {
 };
 
 export default function Calendar() {
+  const today = startOfToday();
   const [view, setView] = useState("Week");
   const [viewValue, setViewValue] = useState(0);
-  const [dates, setDates] = useState([new Date()]);
+  const [dates, setDates] = useState([startOfWeek(today), endOfWeek(today)]);
   const [clickCount, setClickCount] = useState(0);
   const [isTodayActive, SetIsTodayActive] = useState(true);
   const [eventsList, setEventsList] = useState<eventType[]>([]);
 
-  const today = startOfToday();
   const weekStarts = startOfWeek(today, { weekStartsOn: 0 });
   const weekEnds = endOfWeek(today, { weekStartsOn: 0 });
 
@@ -40,16 +40,29 @@ export default function Calendar() {
 
   useEffect(() => {
     showThisWeek();
-    handleGetEvents();
   }, []);
 
+  useEffect(() => {
+    handleGetEvents();
+  }, [dates]);
+
   const handleGetEvents = async () => {
-    // const data = fetch("https://jsonplaceholder.typicode.com/users")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setEventsList(data);
-    //   });
-    setEventsList(sampleData);
+    // http://52.35.66.255:8000/calendar_app/api/calendar?from_date=2024-01-01&to_date=2024-08-30
+    try {
+      const data = fetch(
+        `${import.meta.env.VITE_EVENTS_API}?from_date=${format(
+          dates[0],
+          "yyyy-MM-dd"
+        )}&to_date=${format(dates[dates.length - 1], "yyy-MM-dd")}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setEventsList(data);
+        });
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const FindViewValue = (view: string) => {
@@ -98,23 +111,11 @@ export default function Calendar() {
     setDates(daysOfWeek);
     SetIsTodayActive(false);
   };
+
+  // console.log(eventsList);
   return (
     <div className="calendar-wrap">
       {/* Top bar block */}
-      {/* <div>
-        {sampleData &&
-          sampleData.map((event: any, index) => {
-            return (
-              <div key={index}>
-                <p>{event.summary}</p>
-                <div>
-                  <span>{event.start && format(event.start, "hh aaa")}</span> -{" "}
-                  <span>{event.end && format(event.end, "hh aaa")}</span>
-                </div>
-              </div>
-            );
-          })}
-      </div> */}
       <div className="top-bar">
         <h2>Your Todo's</h2>
         <div className="flex gap-4">
