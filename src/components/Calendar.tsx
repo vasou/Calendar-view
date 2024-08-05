@@ -13,6 +13,7 @@ import {
   addDays,
 } from "date-fns";
 import { sampleData } from "../userdata/sampleData";
+import DateColumn from "./DateColumn";
 
 type eventType = {
   id: number;
@@ -48,6 +49,7 @@ export default function Calendar() {
     //   .then((data) => {
     //     setEventsList(data);
     //   });
+    setEventsList(sampleData);
   };
 
   const FindViewValue = (view: string) => {
@@ -99,7 +101,7 @@ export default function Calendar() {
   return (
     <div className="calendar-wrap">
       {/* Top bar block */}
-      <div>
+      {/* <div>
         {sampleData &&
           sampleData.map((event: any, index) => {
             return (
@@ -112,7 +114,7 @@ export default function Calendar() {
               </div>
             );
           })}
-      </div>
+      </div> */}
       <div className="top-bar">
         <h2>Your Todo's</h2>
         <div className="flex gap-4">
@@ -188,32 +190,12 @@ export default function Calendar() {
             <>
               {dates.map((dateList, index) => {
                 return (
-                  <div className="day-wrapper" key={index}>
-                    {sampleData.map((eventInfo, index) => {
-                      const position =
-                        parseInt(format(eventInfo.start, "H")) * 56;
-                      return (
-                        <>
-                          {format(dateList, "dd/MM/yyyy") ===
-                            format(eventInfo.start, "dd/MM/yyyy") && (
-                            <div
-                              className="event-card"
-                              style={{
-                                top: `${position}px`,
-                              }}
-                              key={index}
-                            >
-                              <p>{eventInfo.summary}</p>
-                              <p>
-                                {format(eventInfo.start, "hh aaa")} -{" "}
-                                {format(eventInfo.end, "hh aaa")}
-                              </p>
-                            </div>
-                          )}
-                        </>
-                      );
-                    })}
-                  </div>
+                  <DateColumn
+                    datesCount={dateList}
+                    eventsList={eventsList}
+                    key={index}
+                    columnKey={index}
+                  />
                 );
               })}
             </>
