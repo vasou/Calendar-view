@@ -1,4 +1,3 @@
-import React from "react";
 import Close from "../assets/Close";
 import { format } from "date-fns";
 import GoogleMeet from "../assets/GoogleMeet";

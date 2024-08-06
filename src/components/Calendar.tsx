@@ -12,7 +12,6 @@ import {
   format,
   addDays,
 } from "date-fns";
-import { sampleData } from "../userdata/sampleData";
 import DateColumn from "./DateColumn";
 
 type eventType = {
@@ -24,7 +23,7 @@ type eventType = {
 
 export default function Calendar() {
   const today = startOfToday();
-  const [view, setView] = useState("Week");
+  const [view] = useState("Week");
   const [viewValue, setViewValue] = useState(0);
   const [dates, setDates] = useState([startOfWeek(today), endOfWeek(today)]);
   const [clickCount, setClickCount] = useState(0);
@@ -49,7 +48,7 @@ export default function Calendar() {
   const handleGetEvents = async () => {
     // http://52.35.66.255:8000/calendar_app/api/calendar?from_date=2024-01-01&to_date=2024-08-30
     try {
-      const data = fetch(
+      fetch(
         `${import.meta.env.VITE_EVENTS_API}?from_date=${format(
           dates[0],
           "yyyy-MM-dd"

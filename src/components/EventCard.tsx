@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { format } from "date-fns";
 import EventPopup from "./EventPopup";
 
-type eventType = {
-  id: number;
-  summary: string;
-  desc: string;
-  start: string;
-  end: string;
-  attendees: string;
-  status: null;
-  comment: null;
-  link: string;
-};
+// type eventType = {
+//   id: number;
+//   summary: string;
+//   desc: string;
+//   start: string;
+//   end: string;
+//   attendees: string;
+//   status: null;
+//   comment: null;
+//   link: string;
+// };
 
 interface EventCardProps {
   position?: number;
