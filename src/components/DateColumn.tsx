@@ -69,7 +69,7 @@ export default function DateColumn({
       {uniqueEvents.map((event, index) => {
         const position = parseInt(format(event.start, "H")) * 56;
         return (
-          <>
+          <div key={index}>
             {format(datesCount, "dd/MM/yyyy") ===
               format(event.start, "dd/MM/yyyy") && (
               <EventCard
@@ -79,13 +79,13 @@ export default function DateColumn({
                 displayAsList={false}
               />
             )}
-          </>
+          </div>
         );
       })}
       {duplicates.map((event, index) => {
         const position = parseInt(format(event.start, "H")) * 56;
         return (
-          <>
+          <div key={index}>
             {format(datesCount, "dd/MM/yyyy") ===
               format(event.start, "dd/MM/yyyy") && (
               <EventsGrouped
@@ -94,7 +94,7 @@ export default function DateColumn({
                 eventList={duplicates}
               />
             )}
-          </>
+          </div>
         );
       })}
     </div>

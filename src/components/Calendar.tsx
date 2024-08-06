@@ -111,6 +111,7 @@ export default function Calendar() {
     SetIsTodayActive(false);
   };
 
+  const changeMonth = () => {};
   // console.log(eventsList);
   return (
     <div className="calendar-wrap">
@@ -118,7 +119,7 @@ export default function Calendar() {
       <div className="top-bar">
         <h2>Your Todo's</h2>
         <div className="flex gap-4">
-          <select value={format(today, "LLLL")}>
+          <select value={format(today, "LLLL")} onChange={changeMonth}>
             {Months.map((list, index) => {
               return (
                 <option key={index} value={list}>
@@ -127,7 +128,7 @@ export default function Calendar() {
               );
             })}
           </select>
-          <select value={format(today, "y")}>
+          <select value={format(today, "y")} onChange={changeMonth}>
             {Years.map((list, index) => {
               return (
                 <option key={index} value={list}>
