@@ -33,6 +33,9 @@ export default function Calendar() {
   const weekStarts = startOfWeek(today, { weekStartsOn: 0 });
   const weekEnds = endOfWeek(today, { weekStartsOn: 0 });
 
+  const [selectMonth, setSelectMonth] = useState(format(today, "LLLL"));
+  const [selectYear, setSelectYear] = useState(format(today, "y"));
+
   useEffect(() => {
     FindViewValue(view);
   }, [viewValue]);
@@ -111,7 +114,6 @@ export default function Calendar() {
     SetIsTodayActive(false);
   };
 
-  const changeMonth = () => {};
   // console.log(eventsList);
   return (
     <div className="calendar-wrap">
@@ -119,7 +121,10 @@ export default function Calendar() {
       <div className="top-bar">
         <h2>Your Todo's</h2>
         <div className="flex gap-4">
-          <select value={format(today, "LLLL")} onChange={changeMonth}>
+          <select
+            value={selectMonth}
+            onChange={(e) => setSelectMonth(e.target.value)}
+          >
             {Months.map((list, index) => {
               return (
                 <option key={index} value={list}>
@@ -128,7 +133,10 @@ export default function Calendar() {
               );
             })}
           </select>
-          <select value={format(today, "y")} onChange={changeMonth}>
+          <select
+            value={selectYear}
+            onChange={(e) => setSelectYear(e.target.value)}
+          >
             {Years.map((list, index) => {
               return (
                 <option key={index} value={list}>
@@ -215,13 +223,13 @@ export default function Calendar() {
           <div className="timeslots">
             {Timeslots.map((time, index) => {
               return (
-                <div key={index} className="one-hr-block !border-0">
+                <div key={index} className="one-hr-block">
                   <span>{time}</span>
                 </div>
               );
             })}
           </div>
-          <>
+          {/* <>
             {[...Array(viewValue)].map((_, index) => {
               return (
                 <div className="day-wrapper" key={index}>
@@ -231,7 +239,7 @@ export default function Calendar() {
                 </div>
               );
             })}
-          </>
+          </> */}
         </div>
       </div>
     </div>
