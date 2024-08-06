@@ -31,7 +31,7 @@
   @apply relative;
 }
 .calendar-header {
-  @apply sticky top-0 left-0 right-0 min-h-20 flex flex-row bg-white z-50 border-b border-solid border-gray-300;
+  @apply sticky top-0 left-0 right-0 min-h-20 flex flex-row bg-white z-40 border-b border-solid border-gray-300;
 }
 .calendar-header .timeslots {
   @apply grid shrink-0 w-24;
@@ -62,5 +62,29 @@
   @apply grid shrink-0 w-24;
 }
 .event-card {
-  @apply absolute w-[95%] min-h-14 p-1 text-sm leading-[16px] bg-blue-700 text-white rounded-md;
+  @apply absolute w-[95%] min-h-14 p-1 text-sm text-left leading-[16px] bg-blue-700 text-white rounded-md;
+}
+
+/* Event popup styles */
+.event-popup {
+  @apply hidden w-full h-full fixed top-0 bottom-0 left-0 right-0 bg-white/80 z-[99];
+}
+.event-popup.open {
+  @apply flex justify-center items-center;
+}
+.event-popup .card {
+  @apply p-3 w-full h-full max-w-[600px] max-h-[400px] bg-white border border-solid border-gray-300 rounded-md overflow-auto;
+}
+.event-content {
+  @apply grid grid-cols-2 border border-solid border-gray-300 rounded-md;
+}
+.event-content .left {
+  @apply grid grid-cols-1 gap-2 border-r border-solid border-gray-300;
+}
+.event-content .left,
+.event-content .right {
+  @apply p-3;
+}
+.event-content .right {
+  @apply py-14 flex items-center justify-center;
 }

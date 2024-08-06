@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import EventCard from "./EventCard";
+import EventsGrouped from "./EventsGrouped";
 
 interface eventType {
   id: number;
@@ -26,24 +27,46 @@ export default function DateColumn({
   eventsList,
   columnKey,
 }: DateColumnProps) {
-  const [columnEvent, setColumnEvent] = useState<eventType[]>([]);
+  const [events, setEvents] = useState<eventType[]>([]);
 
   useEffect(() => {
-    findColumnEvent();
+    // findColumnEvent();
+    setEvents(eventsList);
   }, [eventsList]);
 
-  const findColumnEvent = () => {
-    const data = eventsList.filter(
-      (item) => format(item.start, "HH") === format(datesCount, "HH")
-    );
-    console.log(data);
-    setColumnEvent(data);
+  const findAndRemoveDuplicates = (
+    events: eventType[]
+  ): { uniqueEvents: eventType[]; duplicates: eventType[] } => {
+    const eventMap = new Map<string, eventType[]>();
+    const duplicates: eventType[] = [];
+
+    events.forEach((event) => {
+      const eventKey = `${event.start}-${event.end}`;
+      if (eventMap.has(eventKey)) {
+        eventMap.get(eventKey)!.push(event);
+      } else {
+        eventMap.set(eventKey, [event]);
+      }
+    });
+
+    eventMap.forEach((eventList) => {
+      if (eventList.length > 1) {
+        duplicates.push(...eventList);
+      }
+    });
+
+    const uniqueEvents = events.filter((event) => !duplicates.includes(event));
+
+    return { uniqueEvents, duplicates };
   };
-  console.log(columnEvent);
+
+  const { uniqueEvents, duplicates } = findAndRemoveDuplicates(events);
+  //   console.log("unique events", uniqueEvents);
+  //   console.log("duplicates events", duplicates);
 
   return (
     <div className="day-wrapper" key={columnKey}>
-      {eventsList.map((event, index) => {
+      {uniqueEvents.map((event, index) => {
         const position = parseInt(format(event.start, "H")) * 56;
         return (
           <>
@@ -58,15 +81,22 @@ export default function DateColumn({
           </>
         );
       })}
-      {columnEvent &&
-        columnEvent.map((event, index) => {
-          return (
-            <>
-              <p>{event.start}</p>
-              <p>{event.end}</p>
-            </>
-          );
-        })}
+      {duplicates.map((event, index) => {
+        const position = parseInt(format(event.start, "H")) * 56;
+        return (
+          <>
+            {format(datesCount, "dd/MM/yyyy") ===
+              format(event.start, "dd/MM/yyyy") && (
+              <EventsGrouped
+                position={position}
+                indexNumber={index}
+                eventList={event}
+                eventCount={duplicates.length}
+              />
+            )}
+          </>
+        );
+      })}
     </div>
   );
 }

@@ -59,7 +59,7 @@ export default function Calendar() {
         .then((data) => {
           setEventsList(data);
         });
-      console.log(data);
+      // console.log(data);
     } catch (err) {
       console.log(err);
     }
