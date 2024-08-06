@@ -5,3 +5,6 @@ body {
 .link-button {
   @apply px-4 py-2 text-white bg-blue-700 rounded-md;
 }
+.api-response {
+  @apply absolute bottom-4 mx-auto left-0 right-0 text-center px-4 py-2 w-[300px] bg-red-200 rounded-md z-50;
+}
