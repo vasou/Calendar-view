@@ -176,60 +176,62 @@ export default function Calendar() {
           })}
         </div>
       </div>
+      <div className="calendaer-group-wrap">
+        <div className="calendar-group">
+          {/* Calendar header */}
+          <div className="calendar-header">
+            <div className="timeslots"></div>
+            <>
+              {dates &&
+                dates.map((item, index) => {
+                  return (
+                    <div className="day-wrapper" key={index}>
+                      <div className="flex flex-col justify-center items-center gap-2 h-full">
+                        {format(item, "d MMM") === format(today, "d MMM") ? (
+                          <p className="text-blue-700">
+                            {format(item, "d MMM")}
+                          </p>
+                        ) : (
+                          <p>{format(item, "d MMM")}</p>
+                        )}
 
-      <div className="calendar-group">
-        {/* Calendar header */}
-        <div className="calendar-header">
-          <div className="timeslots"></div>
-          <>
-            {dates &&
-              dates.map((item, index) => {
-                return (
-                  <div className="day-wrapper" key={index}>
-                    <div className="flex flex-col justify-center items-center gap-2 h-full">
-                      {format(item, "d MMM") === format(today, "d MMM") ? (
-                        <p className="text-blue-700">{format(item, "d MMM")}</p>
-                      ) : (
-                        <p>{format(item, "d MMM")}</p>
-                      )}
-
-                      <p className="text-gray-500">{format(item, "EEEE")}</p>
+                        <p className="text-gray-500">{format(item, "EEEE")}</p>
+                      </div>
                     </div>
+                  );
+                })}
+            </>
+          </div>
+          {/* Calendar data block */}
+          <div className="event-list-wrap">
+            <div className="event-list-blk">
+              <div className="timeslots"></div>
+              <>
+                {dates.map((dateList, index) => {
+                  return (
+                    <DateColumn
+                      datesCount={dateList}
+                      eventsList={eventsList}
+                      key={index}
+                      columnKey={index}
+                    />
+                  );
+                })}
+              </>
+            </div>
+          </div>
+          {/* Calendar list */}
+          <div className="calendar-list">
+            <div className="timeslots">
+              {Timeslots.map((time, index) => {
+                return (
+                  <div key={index} className="one-hr-block">
+                    <span>{time}</span>
                   </div>
                 );
               })}
-          </>
-        </div>
-        {/* Calendar data block */}
-        <div className="event-list-wrap">
-          <div className="event-list-blk">
-            <div className="timeslots"></div>
-            <>
-              {dates.map((dateList, index) => {
-                return (
-                  <DateColumn
-                    datesCount={dateList}
-                    eventsList={eventsList}
-                    key={index}
-                    columnKey={index}
-                  />
-                );
-              })}
-            </>
-          </div>
-        </div>
-        {/* Calendar list */}
-        <div className="calendar-list">
-          <div className="timeslots">
-            {Timeslots.map((time, index) => {
-              return (
-                <div key={index} className="one-hr-block">
-                  <span>{time}</span>
-                </div>
-              );
-            })}
-          </div>
-          {/* <>
+            </div>
+            {/* <>
             {[...Array(viewValue)].map((_, index) => {
               return (
                 <div className="day-wrapper" key={index}>
@@ -240,6 +242,7 @@ export default function Calendar() {
               );
             })}
           </> */}
+          </div>
         </div>
       </div>
     </div>

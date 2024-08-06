@@ -1,5 +1,5 @@
 .calendar-wrap {
-  @apply p-4 bg-white rounded-md;
+  @apply p-4 bg-white rounded-md overflow-auto;
 }
 .top-bar {
   @apply mb-6 flex justify-between items-center gap-6;
@@ -27,8 +27,11 @@
 }
 
 /* Calendar styles */
+.calendaer-group-wrap {
+  @apply overflow-auto;
+}
 .calendar-group {
-  @apply relative;
+  @apply relative min-w-[900px];
 }
 .calendar-header {
   @apply sticky top-0 left-0 right-0 min-h-20 flex flex-row bg-white z-40 border-b border-solid border-gray-300;
