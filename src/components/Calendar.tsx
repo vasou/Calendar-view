@@ -29,7 +29,6 @@ export default function Calendar() {
   const [clickCount, setClickCount] = useState(0);
   const [isTodayActive, SetIsTodayActive] = useState(true);
   const [eventsList, setEventsList] = useState<eventType[]>([]);
-  const [apiError, setApiError] = useState(false);
 
   const weekStarts = startOfWeek(today, { weekStartsOn: 0 });
   const weekEnds = endOfWeek(today, { weekStartsOn: 0 });
@@ -64,7 +63,6 @@ export default function Calendar() {
         });
       // console.log(data);
     } catch (err) {
-      setApiError(true);
       console.log(err);
     }
   };
@@ -118,145 +116,124 @@ export default function Calendar() {
 
   // console.log(eventsList);
   return (
-    <>
-      {apiError && (
-        <div className="api-response">
-          <h2>Couldn't connect to API</h2>
-        </div>
-      )}
-
-      <div className="calendar-wrap">
-        {/* Top bar block */}
-        <div className="top-bar">
-          <h2>Your Todo's</h2>
-          <div className="flex gap-4">
-            <select
-              value={selectMonth}
-              onChange={(e) => setSelectMonth(e.target.value)}
-            >
-              {Months.map((list, index) => {
-                return (
-                  <option key={index} value={list}>
-                    {list}
-                  </option>
-                );
-              })}
-            </select>
-            <select
-              value={selectYear}
-              onChange={(e) => setSelectYear(e.target.value)}
-            >
-              {Years.map((list, index) => {
-                return (
-                  <option key={index} value={list}>
-                    {list}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        </div>
-        {/* Nav bar block */}
-        <div className="nav-bar">
-          <div className="flex gap-2">
-            <button className="icon-btn" onClick={showPrevWeek}>
-              <LeftArrow />
-            </button>
-            <button
-              className={`!px-6 icon-btn ${isTodayActive ? "active" : ""}`}
-              onClick={showThisWeek}
-            >
-              Today
-            </button>
-            <button className="icon-btn" onClick={showNextWeek}>
-              <RightArrow />
-            </button>
-          </div>
-          <div className="flex gap-8">
-            {CalendarView.map((list, index) => {
+    <div className="calendar-wrap">
+      {/* Top bar block */}
+      <div className="top-bar">
+        <h2>Your Todo's</h2>
+        <div className="flex gap-4">
+          <select
+            value={selectMonth}
+            onChange={(e) => setSelectMonth(e.target.value)}
+          >
+            {Months.map((list, index) => {
               return (
-                <button
-                  className={`nav-link ${list.name === view ? "active" : ""}`}
-                  key={index}
-                >
-                  {list.name}
-                </button>
+                <option key={index} value={list}>
+                  {list}
+                </option>
               );
             })}
-          </div>
+          </select>
+          <select
+            value={selectYear}
+            onChange={(e) => setSelectYear(e.target.value)}
+          >
+            {Years.map((list, index) => {
+              return (
+                <option key={index} value={list}>
+                  {list}
+                </option>
+              );
+            })}
+          </select>
         </div>
-        <div className="calendaer-group-wrap">
-          <div className="calendar-group">
-            {/* Calendar header */}
-            <div className="calendar-header">
-              <div className="timeslots"></div>
-              <>
-                {dates &&
-                  dates.map((item, index) => {
-                    return (
-                      <div className="day-wrapper" key={index}>
-                        <div className="flex flex-col justify-center items-center gap-2 h-full">
-                          {format(item, "d MMM") === format(today, "d MMM") ? (
-                            <p className="text-blue-700">
-                              {format(item, "d MMM")}
-                            </p>
-                          ) : (
-                            <p>{format(item, "d MMM")}</p>
-                          )}
-
-                          <p className="text-gray-500">
-                            {format(item, "EEEE")}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-              </>
-            </div>
-            {/* Calendar data block */}
-            <div className="event-list-wrap">
-              <div className="event-list-blk">
-                <div className="timeslots"></div>
-                <>
-                  {dates.map((dateList, index) => {
-                    return (
-                      <DateColumn
-                        datesCount={dateList}
-                        eventsList={eventsList}
-                        key={index}
-                        columnKey={index}
-                      />
-                    );
-                  })}
-                </>
-              </div>
-            </div>
-            {/* Calendar list */}
-            <div className="calendar-list">
-              <div className="timeslots">
-                {Timeslots.map((time, index) => {
+      </div>
+      {/* Nav bar block */}
+      <div className="nav-bar">
+        <div className="flex gap-2">
+          <button className="icon-btn" onClick={showPrevWeek}>
+            <LeftArrow />
+          </button>
+          <button
+            className={`!px-6 icon-btn ${isTodayActive ? "active" : ""}`}
+            onClick={showThisWeek}
+          >
+            Today
+          </button>
+          <button className="icon-btn" onClick={showNextWeek}>
+            <RightArrow />
+          </button>
+        </div>
+        <div className="flex gap-8">
+          {CalendarView.map((list, index) => {
+            return (
+              <button
+                className={`nav-link ${list.name === view ? "active" : ""}`}
+                key={index}
+              >
+                {list.name}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div className="calendaer-group-wrap">
+        <div className="calendar-group">
+          {/* Calendar header */}
+          <div className="calendar-header">
+            <div className="timeslots"></div>
+            <>
+              {dates &&
+                dates.map((item, index) => {
                   return (
-                    <div key={index} className="one-hr-block">
-                      <span>{time}</span>
+                    <div className="day-wrapper" key={index}>
+                      <div className="flex flex-col justify-center items-center gap-2 h-full">
+                        {format(item, "d MMM") === format(today, "d MMM") ? (
+                          <p className="text-blue-700">
+                            {format(item, "d MMM")}
+                          </p>
+                        ) : (
+                          <p>{format(item, "d MMM")}</p>
+                        )}
+
+                        <p className="text-gray-500">{format(item, "EEEE")}</p>
+                      </div>
                     </div>
                   );
                 })}
-              </div>
-              {/* <>
-            {[...Array(viewValue)].map((_, index) => {
-              return (
-                <div className="day-wrapper" key={index}>
-                  {Timeslots.map((_, index) => {
-                    return <div key={index} className="one-hr-block"></div>;
-                  })}
-                </div>
-              );
-            })}
-          </> */}
+            </>
+          </div>
+          {/* Calendar data block */}
+          <div className="event-list-wrap">
+            <div className="event-list-blk">
+              <div className="timeslots"></div>
+              <>
+                {dates.map((dateList, index) => {
+                  return (
+                    <DateColumn
+                      datesCount={dateList}
+                      eventsList={eventsList}
+                      key={index}
+                      columnKey={index}
+                    />
+                  );
+                })}
+              </>
+            </div>
+          </div>
+          {/* Calendar list */}
+          <div className="calendar-list">
+            <div className="timeslots">
+              {Timeslots.map((time, index) => {
+                return (
+                  <div key={index} className="one-hr-block">
+                    <span>{time}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
