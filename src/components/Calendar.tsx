@@ -119,14 +119,22 @@ export default function Calendar() {
       <div className="top-bar">
         <h2>Your Todo's</h2>
         <div className="flex gap-4">
-          <select>
+          <select value={format(today, "LLLL")}>
             {Months.map((list, index) => {
-              return <option key={index}>{list}</option>;
+              return (
+                <option key={index} value={list}>
+                  {list}
+                </option>
+              );
             })}
           </select>
-          <select>
+          <select value={format(today, "y")}>
             {Years.map((list, index) => {
-              return <option key={index}>{list}</option>;
+              return (
+                <option key={index} value={list}>
+                  {list}
+                </option>
+              );
             })}
           </select>
         </div>

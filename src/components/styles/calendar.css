@@ -96,3 +96,6 @@
 .event-group-layer {
   @apply fixed top-0 right-0 bottom-0 left-0 bg-white/90;
 }
+.event-count {
+  @apply absolute -top-3 -right-3 flex justify-center items-center text-black text-sm font-medium w-7 h-7 bg-yellow-400 rounded-full;
+}

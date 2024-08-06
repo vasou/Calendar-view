@@ -52,6 +52,9 @@ const EventsGrouped = ({
             setShowMore((prev) => !prev);
           }}
         >
+          <div className="event-count">
+            <p>{eventList.length}</p>
+          </div>
           <p>{eventList.length} are events available</p>
         </button>
       )}
