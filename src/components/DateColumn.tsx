@@ -76,6 +76,7 @@ export default function DateColumn({
                 position={position}
                 indexNumber={index}
                 eventList={event}
+                displayAsList={false}
               />
             )}
           </>
@@ -90,8 +91,7 @@ export default function DateColumn({
               <EventsGrouped
                 position={position}
                 indexNumber={index}
-                eventList={event}
-                eventCount={duplicates.length}
+                eventList={duplicates}
               />
             )}
           </>

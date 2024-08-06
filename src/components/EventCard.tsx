@@ -15,16 +15,22 @@ type eventType = {
 };
 
 interface EventCardProps {
-  position: number;
+  position?: number;
   indexNumber: number;
   eventList: any;
+  displayAsList: boolean;
 }
-const EventCard = ({ position, indexNumber, eventList }: EventCardProps) => {
+const EventCard = ({
+  position,
+  indexNumber,
+  eventList,
+  displayAsList,
+}: EventCardProps) => {
   const [popup, setPopup] = useState(false);
   return (
     <>
       <button
-        className="event-card"
+        className={`event-card ${displayAsList ? "!relative !w-full" : ""}`}
         style={{
           top: `${position}px`,
         }}

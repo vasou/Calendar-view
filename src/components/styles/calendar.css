@@ -88,3 +88,11 @@
 .event-content .right {
   @apply py-14 flex items-center justify-center;
 }
+
+/* Grouped event style */
+.event-group-wrap {
+  @apply absolute grid grid-cols-1 gap-2 left-0 top-0 w-[120%];
+}
+.event-group-layer {
+  @apply fixed top-0 right-0 bottom-0 left-0 bg-white/90;
+}
