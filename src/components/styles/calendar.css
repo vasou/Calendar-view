@@ -28,7 +28,7 @@
 
 /* Calendar styles */
 .calendaer-group-wrap {
-  @apply overflow-auto;
+  @apply overflow-x-auto;
 }
 .calendar-group {
   @apply relative min-w-[900px];
