@@ -1,6 +1,6 @@
 import { Timeslots } from "../userdata/calendar";
 
-export default function TimebarList() {
+export default function WeekRowList() {
   return (
     <div className="calendar-list">
       <div className="timeslots">

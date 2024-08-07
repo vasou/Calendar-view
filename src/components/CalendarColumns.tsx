@@ -10,9 +10,10 @@ type eventType = {
 
 interface CalendarColumnsProps {
   dates: Date[];
+  view: string;
 }
 
-const CalendarColumns = ({ dates }: CalendarColumnsProps) => {
+const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
   const [eventsList, setEventsList] = useState<eventType[]>([]);
   useEffect(() => {
     handleGetEvents();
@@ -37,22 +38,74 @@ const CalendarColumns = ({ dates }: CalendarColumnsProps) => {
     }
   };
   return (
-    <div className="event-list-wrap">
-      <div className="event-list-blk">
-        <div className="timeslots"></div>
-        <>
-          {dates.map((dateList, index) => {
-            return (
-              <DateColumn
-                datesCount={dateList}
-                eventsList={eventsList}
-                key={index}
-                columnKey={index}
-              />
-            );
-          })}
-        </>
-      </div>
+    <div className={`event-list-wrap ${view === "Month" ? "!relative" : ""}`}>
+      {view === "Day" && (
+        <div className="event-list-blk">
+          <div className="timeslots"></div>
+          <>
+            {dates.map((dateList, index) => {
+              return (
+                <DateColumn
+                  datesCount={dateList}
+                  eventsList={eventsList}
+                  key={index}
+                  columnKey={index}
+                />
+              );
+            })}
+          </>
+        </div>
+      )}
+      {view === "Week" && (
+        <div className="event-list-blk">
+          <div className="timeslots"></div>
+          <>
+            {dates.map((dateList, index) => {
+              return (
+                <DateColumn
+                  datesCount={dateList}
+                  eventsList={eventsList}
+                  key={index}
+                  columnKey={index}
+                />
+              );
+            })}
+          </>
+        </div>
+      )}
+      {view === "Month" && (
+        <div className="event-list-blk month">
+          <>
+            {dates.map((dateList, index) => {
+              return (
+                <DateColumn
+                  datesCount={dateList}
+                  eventsList={eventsList}
+                  key={index}
+                  columnKey={index}
+                />
+              );
+            })}
+          </>
+        </div>
+      )}
+      {view === "Year" && (
+        <div className="event-list-blk">
+          <div className="timeslots"></div>
+          <>
+            {dates.map((dateList, index) => {
+              return (
+                <DateColumn
+                  datesCount={dateList}
+                  eventsList={eventsList}
+                  key={index}
+                  columnKey={index}
+                />
+              );
+            })}
+          </>
+        </div>
+      )}
     </div>
   );
 };

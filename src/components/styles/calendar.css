@@ -27,7 +27,7 @@
 }
 
 /* Calendar styles */
-.calendaer-group-wrap {
+.calendar-group-wrap {
   @apply overflow-x-auto;
 }
 .calendar-group {
@@ -54,6 +54,9 @@
 .calendar-list .one-hr-block {
   @apply w-full h-14 border-0 border-t border-b border-solid border-gray-200;
 }
+/* .calendar-list .month-row-block {
+  @apply w-full h-[220px] border-0 border-t border-b border-solid border-gray-200;
+} */
 /* Event styles */
 .event-list-wrap {
   @apply absolute w-full h-full;
@@ -63,6 +66,12 @@
 }
 .event-list-blk .timeslots {
   @apply grid shrink-0 w-24;
+}
+.event-list-blk.month {
+  @apply relative w-full grid grid-cols-7 z-40;
+}
+.event-list-blk.month .day-wrapper {
+  @apply w-full h-[220px] border border-solid border-gray-200;
 }
 .event-card {
   @apply absolute w-[95%] min-h-14 p-1 text-sm text-left leading-[16px] bg-blue-700 text-white rounded-md;

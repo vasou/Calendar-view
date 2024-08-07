@@ -2,7 +2,7 @@ import { useState } from "react";
 import EventCard from "./EventCard";
 
 interface EventCardProps {
-  position: number;
+  position?: number;
   indexNumber: number;
   eventList: any;
 }
@@ -20,7 +20,7 @@ const EventsGrouped = ({
         <div
           className="event-group-wrap"
           style={{
-            top: `${position + 64}px`,
+            top: `${position ? position : 0 + 64}px`,
           }}
         >
           <div

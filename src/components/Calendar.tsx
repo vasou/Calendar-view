@@ -8,16 +8,18 @@ import {
   startOfWeek,
   eachDayOfInterval,
   addDays,
+  startOfMonth,
+  endOfMonth,
 } from "date-fns";
 import TopBar from "./TopBar";
 import NavBar from "./NavBar";
 import CalendarColumns from "./CalendarColumns";
-import TimebarList from "./TimebarList";
 import CalendarHeader from "./CalendarHeader";
+import WeekRowList from "./WeekRowList";
 
 export default function Calendar() {
   const today = startOfToday();
-  const [view] = useState("Week");
+  const [view, setView] = useState("Week");
   const [viewValue, setViewValue] = useState(0);
   const [dates, setDates] = useState([startOfWeek(today), endOfWeek(today)]);
   const [clickCount, setClickCount] = useState(0);
@@ -26,33 +28,48 @@ export default function Calendar() {
   const weekStarts = startOfWeek(today, { weekStartsOn: 0 });
   const weekEnds = endOfWeek(today, { weekStartsOn: 0 });
 
+  const monthStarts = startOfMonth(new Date());
+  const monthEnds = endOfMonth(new Date());
+
+  console.log(monthStarts);
+  console.log(monthEnds);
+
   useEffect(() => {
     FindViewValue(view);
   }, [viewValue]);
 
   useEffect(() => {
-    showThisWeek();
+    // showThisWeek();
+    // showThisMonth();
   }, []);
 
   const FindViewValue = (view: string) => {
     switch (view) {
-      case "Today": {
+      case "Day": {
         return setViewValue(CalendarView[0].columns);
       }
       case "Week": {
+        showThisWeek();
         return setViewValue(CalendarView[1].columns);
       }
       case "Month": {
+        showThisMonth();
         return setViewValue(CalendarView[2].columns);
       }
       case "Year": {
         return setViewValue(CalendarView[3].columns);
       }
       default:
-        setViewValue(0);
+        setViewValue(CalendarView[1].columns);
     }
   };
 
+  const handleView = (name: string) => {
+    setView(name);
+    FindViewValue(name);
+  };
+
+  // Week functionality
   const showThisWeek = () => {
     const daysOfWeek = eachDayOfInterval({ start: weekStarts, end: weekEnds });
     setDates(daysOfWeek);
@@ -81,21 +98,43 @@ export default function Calendar() {
     SetIsTodayActive(false);
   };
 
+  // Month functionality
+  const showThisMonth = () => {
+    const daysOfWeek = eachDayOfInterval({
+      start: monthStarts,
+      end: monthEnds,
+    });
+    setDates(daysOfWeek);
+    SetIsTodayActive(true);
+    console.log("month functionality this month");
+  };
+  const showPrevMonth = () => {
+    console.log("month functionality prev month");
+  };
+  const showNextMonth = () => {
+    console.log("month functionality next month");
+  };
   return (
     <div className="calendar-wrap">
       <TopBar />
       <NavBar
         view={view}
+        handleView={handleView}
         isTodayActive={isTodayActive}
         showPrevWeek={showPrevWeek}
         showThisWeek={showThisWeek}
         showNextWeek={showNextWeek}
+        showPrevMonth={showPrevMonth}
+        showThisMonth={showThisMonth}
+        showNextMonth={showNextMonth}
       />
-      <div className="calendaer-group-wrap">
+      <div className="calendar-group-wrap">
         <div className="calendar-group">
-          <CalendarHeader dates={dates} />
-          <CalendarColumns dates={dates} />
-          <TimebarList />
+          <CalendarHeader dates={dates} view={view} />
+          <CalendarColumns dates={dates} view={view} />
+          {view === "Day" && <WeekRowList />}
+          {view === "Week" && <WeekRowList />}
+          {view === "Year" && <WeekRowList />}
         </div>
       </div>
     </div>
