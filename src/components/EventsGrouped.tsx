@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EventCard from "./EventCard";
+import React from "react";
 
 interface EventCardProps {
   isPositionReq: boolean;
@@ -34,12 +35,14 @@ const EventsGrouped = ({
           {eventList &&
             eventList.map((item: any, index: number) => {
               return (
-                <EventCard
-                  isPositionReq={false}
-                  indexNumber={index}
-                  eventList={item}
-                  displayAsList={true}
-                />
+                <React.Fragment key={index}>
+                  <EventCard
+                    isPositionReq={false}
+                    indexNumber={index}
+                    eventList={item}
+                    displayAsList={true}
+                  />
+                </React.Fragment>
               );
             })}
         </div>

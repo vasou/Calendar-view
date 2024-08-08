@@ -105,10 +105,10 @@ export default function Calendar() {
   };
   const showPrevMonth = () => {
     const counter = clickCountMonth - 34;
-    const tempStart = addDays(dates[0], 34);
+    const tempStart = addDays(dates[0], -34);
     const daysOfMonth = eachDayOfInterval({
       start: tempStart,
-      end: addDays(tempStart, -34),
+      end: addDays(tempStart, 34),
     });
     setClickCountMonth(counter);
     setDates(daysOfMonth);
@@ -124,7 +124,6 @@ export default function Calendar() {
     setClickCountMonth(counter);
     setDates(daysOfMonth);
     SetIsTodayActive(false);
-    console.log(daysOfMonth);
   };
   return (
     <div className="calendar-wrap">

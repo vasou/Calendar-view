@@ -70,10 +70,10 @@ export default function DateColumn({
   return (
     <div className="day-wrapper" key={columnKey}>
       {view === "Month" && (
-        <>
+        <div className="text-center">
           <p>{format(datesCount, "d MMM")}</p>
           <p>{format(datesCount, "ccc")}</p>
-        </>
+        </div>
       )}
       {uniqueEvents.map((event, index) => {
         const position = parseInt(format(event.start, "H")) * 56;

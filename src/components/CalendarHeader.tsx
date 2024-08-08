@@ -56,9 +56,9 @@ const CalendarHeader = ({ dates, view }: CalendarHeaderProps) => {
           </>
         </>
       )}
-      {/* {view === "Month" && (
+      {view === "Month" && (
         <>
-          {dates &&
+          {/* {dates &&
             dates.map((item, index) => {
               return (
                 <div className="day-wrapper" key={index}>
@@ -74,14 +74,14 @@ const CalendarHeader = ({ dates, view }: CalendarHeaderProps) => {
                   </div>
                 </div>
               );
-            })}
+            })} */}
         </>
-      )} */}
+      )}
       {view === "Year" && (
         <>
           <div className="timeslots"></div>
           <>
-            {dates &&
+            {/* {dates &&
               dates.map((item, index) => {
                 return (
                   <div className="day-wrapper" key={index}>
@@ -97,7 +97,7 @@ const CalendarHeader = ({ dates, view }: CalendarHeaderProps) => {
                     </div>
                   </div>
                 );
-              })}
+              })} */}
           </>
         </>
       )}

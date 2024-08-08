@@ -21,7 +21,6 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
   }, [dates]);
 
   const handleGetEvents = async () => {
-    // http://52.35.66.255:8000/calendar_app/api/calendar?from_date=2024-01-01&to_date=2024-08-30
     try {
       fetch(
         `${import.meta.env.VITE_EVENTS_API}?from_date=${format(
@@ -99,7 +98,7 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
         <div className="event-list-blk">
           <div className="timeslots"></div>
           <>
-            {dates.map((dateList, index) => {
+            {/* {dates.map((dateList, index) => {
               return (
                 <DateColumn
                   datesCount={dateList}
@@ -109,7 +108,7 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
                   view={view}
                 />
               );
-            })}
+            })} */}
           </>
         </div>
       )}
