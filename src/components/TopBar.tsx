@@ -14,6 +14,7 @@ export default function TopBar() {
         <select
           value={selectMonth}
           onChange={(e) => setSelectMonth(e.target.value)}
+          disabled
         >
           {Months.map((list, index) => {
             return (
@@ -26,6 +27,7 @@ export default function TopBar() {
         <select
           value={selectYear}
           onChange={(e) => setSelectYear(e.target.value)}
+          disabled
         >
           {Years.map((list, index) => {
             return (
