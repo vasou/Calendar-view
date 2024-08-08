@@ -1,6 +1,7 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import DateColumn from "./DateColumn";
-import { format, startOfToday } from "date-fns";
+import { format } from "date-fns";
 type eventType = {
   id: number;
   summary: string;
@@ -80,7 +81,7 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
           <>
             {dates.map((dateList, index) => {
               return (
-                <>
+                <React.Fragment key={index}>
                   <DateColumn
                     datesCount={dateList}
                     eventsList={eventsList}
@@ -88,7 +89,7 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
                     columnKey={index}
                     view={view}
                   />
-                </>
+                </React.Fragment>
               );
             })}
           </>

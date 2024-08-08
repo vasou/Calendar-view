@@ -23,6 +23,7 @@ export default function Calendar() {
   const [viewValue, setViewValue] = useState(0);
   const [dates, setDates] = useState([startOfWeek(today), endOfWeek(today)]);
   const [clickCount, setClickCount] = useState(0);
+  const [clickCountMonth, setClickCountMonth] = useState(0);
   const [isTodayActive, SetIsTodayActive] = useState(true);
 
   const weekStarts = startOfWeek(today, { weekStartsOn: 0 });
@@ -30,9 +31,6 @@ export default function Calendar() {
 
   const monthStarts = startOfMonth(new Date());
   const monthEnds = endOfMonth(new Date());
-
-  console.log(monthStarts);
-  console.log(monthEnds);
 
   useEffect(() => {
     FindViewValue(view);
@@ -75,7 +73,6 @@ export default function Calendar() {
     setDates(daysOfWeek);
     SetIsTodayActive(true);
   };
-
   const showPrevWeek = () => {
     const counter = clickCount - 7;
     const daysOfWeek = eachDayOfInterval({
@@ -86,7 +83,6 @@ export default function Calendar() {
     setDates(daysOfWeek);
     SetIsTodayActive(false);
   };
-
   const showNextWeek = () => {
     const counter = clickCount + 7;
     const daysOfWeek = eachDayOfInterval({
@@ -100,19 +96,35 @@ export default function Calendar() {
 
   // Month functionality
   const showThisMonth = () => {
-    const daysOfWeek = eachDayOfInterval({
-      start: monthStarts,
-      end: monthEnds,
+    const daysOfMonth = eachDayOfInterval({
+      start: startOfWeek(monthStarts, { weekStartsOn: 0 }),
+      end: addDays(startOfWeek(monthStarts, { weekStartsOn: 0 }), 34),
     });
-    setDates(daysOfWeek);
+    setDates(daysOfMonth);
     SetIsTodayActive(true);
-    console.log("month functionality this month");
   };
   const showPrevMonth = () => {
-    console.log("month functionality prev month");
+    const counter = clickCountMonth - 34;
+    const tempStart = addDays(dates[0], 34);
+    const daysOfMonth = eachDayOfInterval({
+      start: tempStart,
+      end: addDays(tempStart, -34),
+    });
+    setClickCountMonth(counter);
+    setDates(daysOfMonth);
+    SetIsTodayActive(false);
   };
   const showNextMonth = () => {
-    console.log("month functionality next month");
+    const counter = clickCount + 34;
+    const tempStart = addDays(dates[0], 34);
+    const daysOfMonth = eachDayOfInterval({
+      start: tempStart,
+      end: addDays(tempStart, 34),
+    });
+    setClickCountMonth(counter);
+    setDates(daysOfMonth);
+    SetIsTodayActive(false);
+    console.log(daysOfMonth);
   };
   return (
     <div className="calendar-wrap">
