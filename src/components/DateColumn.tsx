@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { format, startOfToday } from "date-fns";
+import { format } from "date-fns";
 import EventCard from "./EventCard";
 import EventsGrouped from "./EventsGrouped";
 

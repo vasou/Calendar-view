@@ -9,7 +9,6 @@ import {
   eachDayOfInterval,
   addDays,
   startOfMonth,
-  endOfMonth,
 } from "date-fns";
 import TopBar from "./TopBar";
 import NavBar from "./NavBar";
@@ -30,7 +29,7 @@ export default function Calendar() {
   const weekEnds = endOfWeek(today, { weekStartsOn: 0 });
 
   const monthStarts = startOfMonth(new Date());
-  const monthEnds = endOfMonth(new Date());
+  // const monthEnds = endOfMonth(new Date());
 
   useEffect(() => {
     FindViewValue(view);
