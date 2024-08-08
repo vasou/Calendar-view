@@ -1,5 +1,6 @@
+import React from "react";
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
+import { format, startOfToday } from "date-fns";
 import EventCard from "./EventCard";
 import EventsGrouped from "./EventsGrouped";
 
@@ -20,12 +21,14 @@ interface DateColumnProps {
   datesCount: Date;
   eventsList: any[];
   columnKey: number;
+  view: string;
 }
 
 export default function DateColumn({
   datesCount,
   eventsList,
   columnKey,
+  view,
 }: DateColumnProps) {
   const [events, setEvents] = useState<eventType[]>([]);
 
@@ -61,40 +64,52 @@ export default function DateColumn({
   };
 
   const { uniqueEvents, duplicates } = findAndRemoveDuplicates(events);
-  //   console.log("unique events", uniqueEvents);
-  //   console.log("duplicates events", duplicates);
+  // console.log("unique events", uniqueEvents);
+  // console.log("duplicates events", duplicates);
 
   return (
     <div className="day-wrapper" key={columnKey}>
+      {view === "Month" && (
+        <>
+          <p>{format(datesCount, "d MMM")}</p>
+          <p>{format(datesCount, "ccc")}</p>
+        </>
+      )}
       {uniqueEvents.map((event, index) => {
         const position = parseInt(format(event.start, "H")) * 56;
         return (
-          <div key={index}>
+          <React.Fragment key={index}>
             {format(datesCount, "dd/MM/yyyy") ===
               format(event.start, "dd/MM/yyyy") && (
-              <EventCard
-                position={position}
-                indexNumber={index}
-                eventList={event}
-                displayAsList={false}
-              />
+              <>
+                <EventCard
+                  isPositionReq={false}
+                  position={position}
+                  indexNumber={index}
+                  eventList={event}
+                  displayAsList={false}
+                />
+              </>
             )}
-          </div>
+          </React.Fragment>
         );
       })}
       {duplicates.map((event, index) => {
         const position = parseInt(format(event.start, "H")) * 56;
         return (
-          <div key={index}>
+          <React.Fragment key={index}>
             {format(datesCount, "dd/MM/yyyy") ===
               format(event.start, "dd/MM/yyyy") && (
-              <EventsGrouped
-                position={position}
-                indexNumber={index}
-                eventList={duplicates}
-              />
+              <>
+                <EventsGrouped
+                  isPositionReq={false}
+                  position={position}
+                  indexNumber={index}
+                  eventList={duplicates}
+                />
+              </>
             )}
-          </div>
+          </React.Fragment>
         );
       })}
     </div>

@@ -56,7 +56,7 @@ const CalendarHeader = ({ dates, view }: CalendarHeaderProps) => {
           </>
         </>
       )}
-      {view === "Month" && (
+      {/* {view === "Month" && (
         <>
           {dates &&
             dates.map((item, index) => {
@@ -76,7 +76,7 @@ const CalendarHeader = ({ dates, view }: CalendarHeaderProps) => {
               );
             })}
         </>
-      )}
+      )} */}
       {view === "Year" && (
         <>
           <div className="timeslots"></div>

@@ -2,25 +2,15 @@ import { useState } from "react";
 import { format } from "date-fns";
 import EventPopup from "./EventPopup";
 
-// type eventType = {
-//   id: number;
-//   summary: string;
-//   desc: string;
-//   start: string;
-//   end: string;
-//   attendees: string;
-//   status: null;
-//   comment: null;
-//   link: string;
-// };
-
 interface EventCardProps {
+  isPositionReq: boolean;
   position?: number;
   indexNumber: number;
   eventList: any;
   displayAsList: boolean;
 }
 const EventCard = ({
+  isPositionReq,
   position,
   indexNumber,
   eventList,
@@ -32,7 +22,7 @@ const EventCard = ({
       <button
         className={`event-card ${displayAsList ? "!relative !w-full" : ""}`}
         style={{
-          top: `${position}px`,
+          top: `${isPositionReq && position}px`,
         }}
         key={indexNumber}
         onClick={() => setPopup((prev) => !prev)}

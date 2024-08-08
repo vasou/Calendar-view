@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DateColumn from "./DateColumn";
-import { format } from "date-fns";
+import { format, startOfToday } from "date-fns";
 type eventType = {
   id: number;
   summary: string;
@@ -50,6 +50,7 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
                   eventsList={eventsList}
                   key={index}
                   columnKey={index}
+                  view={view}
                 />
               );
             })}
@@ -67,6 +68,7 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
                   eventsList={eventsList}
                   key={index}
                   columnKey={index}
+                  view={view}
                 />
               );
             })}
@@ -78,12 +80,15 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
           <>
             {dates.map((dateList, index) => {
               return (
-                <DateColumn
-                  datesCount={dateList}
-                  eventsList={eventsList}
-                  key={index}
-                  columnKey={index}
-                />
+                <>
+                  <DateColumn
+                    datesCount={dateList}
+                    eventsList={eventsList}
+                    key={index}
+                    columnKey={index}
+                    view={view}
+                  />
+                </>
               );
             })}
           </>
@@ -100,6 +105,7 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
                   eventsList={eventsList}
                   key={index}
                   columnKey={index}
+                  view={view}
                 />
               );
             })}

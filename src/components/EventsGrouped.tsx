@@ -2,12 +2,14 @@ import { useState } from "react";
 import EventCard from "./EventCard";
 
 interface EventCardProps {
+  isPositionReq: boolean;
   position?: number;
   indexNumber: number;
   eventList: any;
 }
 
 const EventsGrouped = ({
+  isPositionReq,
   position,
   indexNumber,
   eventList,
@@ -20,7 +22,7 @@ const EventsGrouped = ({
         <div
           className="event-group-wrap"
           style={{
-            top: `${position ? position : 0 + 64}px`,
+            top: `${isPositionReq && position ? position : 0 + 64}px`,
           }}
         >
           <div
@@ -33,6 +35,7 @@ const EventsGrouped = ({
             eventList.map((item: any, index: number) => {
               return (
                 <EventCard
+                  isPositionReq={false}
                   indexNumber={index}
                   eventList={item}
                   displayAsList={true}
@@ -44,7 +47,7 @@ const EventsGrouped = ({
         <button
           className="event-card"
           style={{
-            top: `${position}px`,
+            top: `${isPositionReq && position}px`,
           }}
           key={indexNumber}
           onClick={() => {
