@@ -32,6 +32,7 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
         .then((data) => {
           setEventsList(data);
         });
+      // setEventsList(sampleData);
       // console.log(data);
     } catch (err) {
       console.log(err);

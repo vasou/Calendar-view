@@ -68,7 +68,7 @@ export default function DateColumn({
   // console.log("duplicates events", duplicates);
 
   return (
-    <div className="day-wrapper" key={columnKey}>
+    <div className="day-wrapper flex flex-col gap-1" key={columnKey}>
       {view === "Month" && (
         <div className="text-center">
           <p>{format(datesCount, "d MMM")}</p>
@@ -94,7 +94,7 @@ export default function DateColumn({
           </React.Fragment>
         );
       })}
-      {duplicates.map((event, index) => {
+      {duplicates.slice(0, 1).map((event, index) => {
         const position = parseInt(format(event.start, "H")) * 56;
         return (
           <React.Fragment>

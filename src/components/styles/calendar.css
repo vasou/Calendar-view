@@ -74,7 +74,7 @@
   @apply w-full h-[220px] border border-solid border-gray-200;
 }
 .event-list-blk.month .day-wrapper .event-card {
-  @apply relative;
+  @apply relative min-h-[auto];
 }
 .event-card {
   @apply absolute w-[95%] min-h-14 p-1 text-sm text-left leading-[16px] bg-blue-700 text-white rounded-md;
@@ -107,6 +107,9 @@
 /* Grouped event style */
 .event-group-wrap {
   @apply absolute grid grid-cols-1 gap-2 left-0 top-0 w-[120%] z-10;
+}
+.event-group-wrap .event-card {
+  @apply !min-h-14;
 }
 .event-group-layer {
   @apply fixed top-0 right-0 bottom-0 left-0 bg-white/90;
