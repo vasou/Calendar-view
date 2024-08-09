@@ -83,7 +83,7 @@ export default function DateColumn({
               format(event.start, "dd/MM/yyyy") && (
               <>
                 <EventCard
-                  isPositionReq={false}
+                  isPositionReq={view === "Month" ? false : true}
                   position={position}
                   indexNumber={index}
                   eventList={event}
@@ -97,12 +97,12 @@ export default function DateColumn({
       {duplicates.map((event, index) => {
         const position = parseInt(format(event.start, "H")) * 56;
         return (
-          <React.Fragment key={index}>
+          <React.Fragment>
             {format(datesCount, "dd/MM/yyyy") ===
               format(event.start, "dd/MM/yyyy") && (
               <>
                 <EventsGrouped
-                  isPositionReq={false}
+                  isPositionReq={view === "Month" ? false : true}
                   position={position}
                   indexNumber={index}
                   eventList={duplicates}

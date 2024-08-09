@@ -37,6 +37,7 @@ const CalendarColumns = ({ dates, view }: CalendarColumnsProps) => {
       console.log(err);
     }
   };
+  // console.log("Event list from Calendar columns comp", eventsList);
   return (
     <div className={`event-list-wrap ${view === "Month" ? "!relative" : ""}`}>
       {view === "Day" && (

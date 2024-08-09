@@ -15,7 +15,7 @@ const EventsGrouped = ({
   indexNumber,
   eventList,
 }: EventCardProps) => {
-  // console.log(eventList);
+  console.log(eventList);
   const [showMore, setShowMore] = useState(false);
   return (
     <>

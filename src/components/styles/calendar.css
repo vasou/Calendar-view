@@ -73,6 +73,9 @@
 .event-list-blk.month .day-wrapper {
   @apply w-full h-[220px] border border-solid border-gray-200;
 }
+.event-list-blk.month .day-wrapper .event-card {
+  @apply relative;
+}
 .event-card {
   @apply absolute w-[95%] min-h-14 p-1 text-sm text-left leading-[16px] bg-blue-700 text-white rounded-md;
 }

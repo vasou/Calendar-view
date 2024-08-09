@@ -5,7 +5,7 @@ import EventPopup from "./EventPopup";
 interface EventCardProps {
   isPositionReq: boolean;
   position?: number;
-  indexNumber: number;
+  indexNumber?: number;
   eventList: any;
   displayAsList: boolean;
 }
@@ -17,6 +17,7 @@ const EventCard = ({
   displayAsList,
 }: EventCardProps) => {
   const [popup, setPopup] = useState(false);
+  // console.log("Events card log", eventList);
   return (
     <>
       <button
@@ -24,7 +25,7 @@ const EventCard = ({
         style={{
           top: `${isPositionReq && position}px`,
         }}
-        key={indexNumber}
+        key={indexNumber ? indexNumber : ""}
         onClick={() => setPopup((prev) => !prev)}
       >
         <p>{eventList.summary}</p>
